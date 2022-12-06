@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const Header = () => {
-
+const Input = () => {
+    // TODO => write unit tests
     const loadPreviousTasks = localStorage.getItem('todoList');
     const [input, setInput] = useState('');
     const [list, setList] = useState(loadPreviousTasks.split(',') || []);
@@ -12,7 +12,7 @@ const Header = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addToList(event.target[0].value);
+        addToList(event.target[0].value.trim());
         setInput('');
     }
 
@@ -38,7 +38,7 @@ const Header = () => {
                 <input type="submit" value="Submit" disabled={input === ''} className='button'/>
             </form>
             {
-                list && list.map((task, index) => <div className='button' style={{backgroundColor: (index % 2 == 0)? 'lightgrey' : 'lightblue'}} key={index}>{task}</div>)
+                list?.map((task, index) => <div className='button' style={{backgroundColor: (index % 2 === 0)? 'lightgrey' : 'lightblue'}} key={index}>{task}</div>)
             }
 
             <input type="submit" value="Remove All Tasks" onClick={removeAllTasks} className='button'/>
@@ -46,4 +46,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Input;
